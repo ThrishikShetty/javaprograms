@@ -7,42 +7,49 @@
 
 
 
-import java.io.*;
-public class selectionSort
-{
-    void sort(int arr[])
-    {
-        int n = arr.length;
-        // One by one move boundary of unsorted subarray
-        for (int i = 0; i < n-1; i++)
-        {
-            // Find the minimum element in unsorted array
-            int min_idx = i;
-            for (int j = i+1; j < n; j++)
-                if (arr[j] < arr[min_idx])
-                    min_idx = j;
-            // Swap the found minimum element with the first
-            // element
-            int temp = arr[min_idx];
-            arr[min_idx] = arr[i];
-            arr[i] = temp;
+import java.util.Random;
+import java.util.Scanner;
+public class selectionSort{
+    public static void run(int array[]) {
+        for (int i = 0; i<array.length - 1; i++)
+        { int min = i;
+
+            for (int j = i + 1; j< array.length; j++)
+            { if (array[j] < array[min]) {
+                min = j;
+            }
+            }
+            int temp = array[min];
+            array[min] = array[i];
+            array[i] = temp;
         }
     }
-    // Prints the array
-    void printArray(int arr[])
+    public static void main(String[] args)
     {
-        int n = arr.length;
-        for (int i=0; i<n; ++i)
-            System.out.print(arr[i]+" ");
+        int n,i;
+        Scanner s = new Scanner(System.in);
+        Random r = new Random();
+        System.out.println("Enter the value for n");
+        n = s.nextInt();
+        int a[] = new int[n];
+
+        for (i = 0; i< n; i++) {
+            a[i] = r.nextInt(1000);
+        }
+        System.out.println("The array elements before sorting");
+        for (i = 0; i<n; i++)
+            System.out.print(a[i] + " ");
         System.out.println();
-    }
-    // Driver code to test above
-    public static void main(String args[])
-    {
-        selectionSort ob = new selectionSort();
-        int arr[] = {64,25,12,22,11};
-        ob.sort(arr);
-        System.out.println("Sorted array");
-        ob.printArray(arr);
+        long st = System.currentTimeMillis();
+        run(a);
+        long et = System.currentTimeMillis();
+        long total = et - st;
+        System.out.println("The array elements after sorting");
+        for (i = 0; i < n; i++)
+            System.out.print(a[i] + " ");
+
+        System.out.println();
+        System.out.println("Total time taken=" + total + "ms");
+
     }
 }
